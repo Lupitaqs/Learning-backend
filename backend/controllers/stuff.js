@@ -96,7 +96,7 @@ exports.deleteThing = (req, res, next) => {
                         });
                     }
                 );
-            });
+            }
             ).catch(
                 (error) => {
                     res.status(400).json({
