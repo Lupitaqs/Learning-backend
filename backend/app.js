@@ -29,25 +29,17 @@ app.use((req, res, next) => {
 
 // Middleware to handle GET requests
 app.use('/api/stuff', (req, res, next) => {
-    const stuff = [
-        {
-            _id: 'oeihfzeoi',
-            title: 'My first thing',
-            description: 'All of the info about my first thing',
-            imageUrl: '',
-            price: 4900,
-            userId: 'qsdfqsdf'
-        },
-        {
-            _id: 'oeihfzeomoihi',
-            title: 'My second thing',
-            description: 'All of the info about my second thing',
-            imageUrl: '',
-            price: 2900,
-            userId: 'qsdfqsdf'
+    Thing.find().then(
+        (things) => {
+            res.status(200).json(things);
         }
-    ];
-    res.status(200).json(stuff);
+    ).catch(
+        (error) => {
+            res.status(400).json({
+                error: error
+            });
+        }
+    );
 });
 
 // Middleware to handle POST requests
