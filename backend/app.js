@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.json());
+
 // Middleware to handle CORS errors
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -10,6 +12,8 @@ app.use((req, res, next) => {
     next();
 });
 
+
+// Middleware to handle GET requests
 app.use('/api/stuff', (req, res, next) => {
     const stuff = [
         {
@@ -30,6 +34,14 @@ app.use('/api/stuff', (req, res, next) => {
         }
     ];
     res.status(200).json(stuff);
+});
+
+// Middleware to handle POST requests
+app.post('/api/stuff', (req, res, next) => {
+    console.log(req.body);
+    res.status(201).json({
+        message: 'Thing created successfully!'
+    });
 });
 
 module.exports = app;
